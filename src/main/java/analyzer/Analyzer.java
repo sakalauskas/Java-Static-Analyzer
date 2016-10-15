@@ -1,11 +1,9 @@
 package analyzer;
 
+import analyzer.smells.*;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
-import analyzer.smells.ClassComplexityVisitor;
-import analyzer.smells.ClassLineCounter;
-import analyzer.smells.TooLongVisitor;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -41,10 +39,13 @@ public class Analyzer extends SimpleFileVisitor<Path> {
         //System.out.println(getClassName(file));
 
         // collect stats about too long names
+        new BooleanMethodVisitor().visit(unit, collector);
         new TooLongVisitor().visit(unit, collector);
-        // collect stats about
+        new TooSmallVisitor().visit(unit, collector);
+        new VariableNamingConventionVisitor().visit(unit, collector);
+//         collect stats about
         new ClassLineCounter().visit(file);
-        // collect stats about class complexity
+//         collect stats about class complexity
         new ClassComplexityVisitor().visit(unit, complexityCounter);
 
         // print analysis
@@ -55,11 +56,18 @@ public class Analyzer extends SimpleFileVisitor<Path> {
     }
 
     private String getClassName(Path file) {
-        return file.toString();
+
+        String filename = file.getFileName().toString();
+
+        if (filename.indexOf(".") > 0) {
+            filename = filename.substring(0, filename.lastIndexOf("."));
+        }
+        return filename;
     }
 
     private boolean isNotJava(Path file) {
-        return !getClassName(file).endsWith("java");
+
+        return !file.toString().endsWith("java");
     }
 
 }

@@ -18,7 +18,7 @@ public class Runner {
     public static void main(String[] args) throws Exception {
         AnsiConsole.systemInstall();
 
-        String path = "/Users/laurynassakalauskas/IdeaProjects/HackerRank";
+        String path = "/Users/laurynassakalauskas/IdeaProjects/CS409/testcases/javaparser";
 
         run(path);
 

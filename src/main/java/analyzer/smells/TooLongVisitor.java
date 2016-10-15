@@ -1,11 +1,14 @@
 package analyzer.smells;
 
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.expr.MethodCallExpr;
-import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import analyzer.AbstractVoidVisitorAdapter;
 import analyzer.Collector;
 import analyzer.Config;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 
 public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
@@ -16,9 +19,31 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
     private static final int MAX_PARAM_COUNT = Config.MAX_PARAM_COUNT;
 
+    private static final int MAX_VARIABLE_LENGTH = Config.MAX_VARIABLE_LENGTH;
+
     private static final int MAX_VARIABLE_COUNT =  Config.MAX_VARIABLE_COUNT;
 
     private static final int MAX_METHODS_COUNT = Config.MAX_METHODS_COUNT;
+
+    private static final int MAX_CLASS_INHERITANCE = Config.MAX_CLASS_INHERITANCE;
+
+    /**
+     * Check for inheritance errors
+     *
+     * @param declaration
+     * @param collector
+     */
+    @Override
+    public void visit(ClassOrInterfaceDeclaration declaration, Collector collector) {
+
+        if (declaration.getExtends().size() > MAX_CLASS_INHERITANCE) {
+
+            collector.addWarning(className, "Class extends more then " + MAX_CLASS_INHERITANCE + " classes");
+
+        }
+
+        super.visit(declaration, collector);
+    }
 
     /**
      * Check for method count
@@ -37,7 +62,7 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
         super.visit(declaration, collector);
     }
-    
+
     /**
      * Check for too long method names, body, arguments
      *
@@ -66,12 +91,22 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
             collector.addWarning(className, "Method \"" + declaration.getName() + "\"  has more than " + MAX_METHOD_NAME_LENGTH + " parameters");
         }
 
+        for (Parameter param: declaration.getParameters()) {
+
+            if (param.getName().length() > MAX_VARIABLE_LENGTH) {
+
+                collector.addWarning(className, "Method \"" + declaration.getName() + "\" variable \"" + param.getName() +"\" is way too long!");
+
+            }
+
+        }
+
         collector.incrementMetric("Methods");
     }
 
 
     /**
-     * Check for too many variables
+     * Check for too many variables & for too long ones
      *
      * @param declaration
      * @param collector
@@ -81,6 +116,16 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
         if (declaration.getVars().size() > MAX_VARIABLE_COUNT) {
             collector.addWarning(className, "Class has more than " + MAX_VARIABLE_COUNT + " variables");
+        }
+
+        for (VariableDeclarator variable: declaration.getVars()) {
+
+            if (variable.getId().getName().length() > MAX_VARIABLE_LENGTH) {
+
+                collector.addWarning(className, "Field variable \"" + variable.getId().getName() +"\" is way too long!");
+
+            }
+
         }
 
         collector.incrementMetric("Variables", declaration.getVars().size());

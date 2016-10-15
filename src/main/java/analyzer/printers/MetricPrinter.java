@@ -14,12 +14,12 @@ public class MetricPrinter implements Printable {
         System.out.println("_________________________________");
         System.out.println("|------------METRICS------------|");
         System.out.println("|===============================|");
-        System.out.format("|%15s|%15s|\n", "Type", "Count");
+        System.out.format("|%25s|%5s|\n", "Type", "Count");
         System.out.println("|===============================|");
 
         for (Map.Entry<String, Integer> entry: Collector.stats.entrySet()) {
 
-            System.out.format("|%15s|%15s|\n", entry.getKey(), entry.getValue());
+            System.out.format("|%25s|%5s|\n", entry.getKey(), entry.getValue());
         }
     }
 }

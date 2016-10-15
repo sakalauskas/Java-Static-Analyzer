@@ -3,7 +3,12 @@ package analyzer;
 /**
  * Created by laurynassakalauskas on 15/10/2016.
  */
-public class Config {
+public final class Config {
+
+    /**
+     * Maximum number of acceptable parent classes while inheriting.
+     */
+    public static final int MAX_CLASS_INHERITANCE = 6;
 
     /**
      * Max count for calculating "Cyclomatic Complexity"
@@ -36,6 +41,11 @@ public class Config {
     public static final int MAX_PARAM_COUNT = 8;
 
     /**
+     * Maximum length of variable
+     */
+    public static final int MAX_VARIABLE_LENGTH = 20;
+
+    /**
      * Maximum number of variables declared per class
      */
     public static final int MAX_VARIABLE_COUNT = 15;
@@ -44,6 +54,17 @@ public class Config {
      * Maximum number of methods per class
      */
     public static final int MAX_METHODS_COUNT = 25;
+
+    /**
+     * Minimum length of variable
+     */
+    public static final int MIN_VARIABLE_LENGTH = 3;
+
+    /**
+     * Minimum length of method name
+     */
+    public static final int MIN_METHOD_NAME = 3;
+
 
     public enum Warning {
 

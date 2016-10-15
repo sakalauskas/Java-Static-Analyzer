@@ -107,8 +107,6 @@ public class ComplexityCounter {
         // check if there are any methods
         if (map.entrySet().size() > 0) {
             sum = sum / map.entrySet().size();
-        } else {
-            Collector.getInstance().addWarning(classname, "Class does not have any methods. Is it used?");
         }
 
         if (sum > MAX_WEIGHTED_COUNT) {

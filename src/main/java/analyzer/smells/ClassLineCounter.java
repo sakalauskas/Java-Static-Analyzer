@@ -24,10 +24,11 @@ public class ClassLineCounter {
     public void visit(Path path) throws IOException {
         InputStream is = new FileInputStream(path.toFile());
         int count = 1;
-        for (int aChar = 0; aChar != -1;aChar = is.read())
-            if (aChar == '\n') {
+
+        for (int ch = 0; ch != -1; ch = is.read()) {
+            if (ch == '\n')
                 count++;
-            }
+        }
 
         if (count > MAX_CLASS_LENGTH) {
             Collector.getInstance().addWarning(path.toString(), "Class has more than " + MAX_CLASS_LENGTH + " lines");
