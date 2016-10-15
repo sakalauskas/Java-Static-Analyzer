@@ -1,4 +1,4 @@
-package util;
+package analyzer;
 
 /**
  * Created by laurynassakalauskas on 15/10/2016.
@@ -44,4 +44,9 @@ public class Config {
      * Maximum number of methods per class
      */
     public static final int MAX_METHODS_COUNT = 25;
+
+    public enum Warning {
+
+
+    }
 }

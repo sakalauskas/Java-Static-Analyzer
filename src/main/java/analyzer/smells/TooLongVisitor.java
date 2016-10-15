@@ -1,11 +1,11 @@
-package smells;
+package analyzer.smells;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
-import util.AbstractVoidVisitorAdapter;
-import util.Collector;
-import util.Config;
+import analyzer.AbstractVoidVisitorAdapter;
+import analyzer.Collector;
+import analyzer.Config;
 
 public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
@@ -35,6 +35,7 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
         }
 
+        super.visit(declaration, collector);
     }
     
     /**
@@ -65,6 +66,7 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
             collector.addWarning(className, "Method \"" + declaration.getName() + "\"  has more than " + MAX_METHOD_NAME_LENGTH + " parameters");
         }
 
+        collector.incrementMetric("Methods");
     }
 
 
@@ -80,6 +82,9 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
         if (declaration.getVars().size() > MAX_VARIABLE_COUNT) {
             collector.addWarning(className, "Class has more than " + MAX_VARIABLE_COUNT + " variables");
         }
+
+        collector.incrementMetric("Variables", declaration.getVars().size());
+
     }
     
 }

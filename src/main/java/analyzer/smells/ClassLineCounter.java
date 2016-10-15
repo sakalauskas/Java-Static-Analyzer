@@ -1,7 +1,7 @@
-package smells;
+package analyzer.smells;
 
-import util.Collector;
-import util.Config;
+import analyzer.Collector;
+import analyzer.Config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,11 +25,15 @@ public class ClassLineCounter {
         InputStream is = new FileInputStream(path.toFile());
         int count = 1;
         for (int aChar = 0; aChar != -1;aChar = is.read())
-            count += aChar == '\n' ? 1 : 0;
+            if (aChar == '\n') {
+                count++;
+            }
 
         if (count > MAX_CLASS_LENGTH) {
             Collector.getInstance().addWarning(path.toString(), "Class has more than " + MAX_CLASS_LENGTH + " lines");
         }
+
+        Collector.getInstance().incrementMetric("Code Lines", count);
     }
 
 }

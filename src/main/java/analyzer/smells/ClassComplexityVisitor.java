@@ -1,9 +1,12 @@
-package smells;
+package analyzer.smells;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.*;
-import util.AbstractVoidVisitorAdapter;
-import util.ComplexityCounter;
+import analyzer.AbstractVoidVisitorAdapter;
+import analyzer.ComplexityCounter;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by laurynassakalauskas on 15/10/2016.
@@ -69,15 +72,22 @@ public class ClassComplexityVisitor extends AbstractVoidVisitorAdapter<Complexit
 
         String condition = statement.getCondition().toString();
 
-        if (condition.matches(".*&.*") && !condition.matches(".*&&.*")) {
-            counter.add(methodName, "BITWISE_OPERATOR");
-        }
+        regexCheck(condition, Pattern.compile("/(\\s|\\w|\\d)&(\\s|\\w|\\d)/xg"),  "BITWISE_AND_OPERATOR",  counter);
+        regexCheck(condition, Pattern.compile("/(\\s|\\w|\\d)\\|(\\s|\\w|\\d)/xg"),  "BITWISE_OR_OPERATOR",   counter);
+        regexCheck(condition, Pattern.compile("/(\\s|\\w|\\d)&&(\\s|\\w|\\d)/xg"), "AND_OPERATOR",          counter);
+        regexCheck(condition, Pattern.compile("/(\\s|\\w|\\d)\\|\\|(\\s|\\w|\\d)/xg"), "OR_OPERATOR",           counter);
 
-        if (condition.matches(".*\\|.*") && !condition.matches(".*\\|\\|.*")) {
-            counter.add(methodName, "BITWISE_OPERATOR");
-        }
 
         super.visit(statement, counter);
+    }
+
+
+    private void regexCheck(String haystack, Pattern pattern, String type, ComplexityCounter counter) {
+        Matcher matcher = pattern.matcher(haystack);
+
+        while (matcher.find()) {
+            counter.add(methodName, type);
+        }
     }
 
     /**

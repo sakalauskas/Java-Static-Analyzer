@@ -1,4 +1,4 @@
-package util;
+package analyzer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,20 +40,27 @@ public class ComplexityCounter {
         }
 
         // put information about different stats
-        if (map.containsKey(type)) {
+        if (usage.containsKey(type)) {
 
-            map.put(type, map.get(type) + 1);
+            usage.put(type, usage.get(type) + 1);
         } else {
-            map.put(type, 1);
+            usage.put(type, 1);
         }
     }
 
     public void analyze() {
-
         cyclomaticComplexity();
         weightedMethodCount();
     }
 
+    /**
+     * Retrieves total usage of IF, While, Foreach, bitwise and etc
+     *
+     * @return
+     */
+    public HashMap<String, Integer> getUsage() {
+        return usage;
+    }
 
     /**
      * Calculate cyclomatic complexity for all methods
@@ -89,7 +96,7 @@ public class ComplexityCounter {
      *
      * @return
      */
-    protected int weightedMethodCount() {
+    public int weightedMethodCount() {
 
         int sum = 0;
 
@@ -97,7 +104,12 @@ public class ComplexityCounter {
             sum += entry.getValue();
         }
 
-        sum = sum / map.entrySet().size();
+        // check if there are any methods
+        if (map.entrySet().size() > 0) {
+            sum = sum / map.entrySet().size();
+        } else {
+            Collector.getInstance().addWarning(classname, "Class does not have any methods. Is it used?");
+        }
 
         if (sum > MAX_WEIGHTED_COUNT) {
             Collector.getInstance().addWarning(classname, "Class has Weighted Method Count more than " + MAX_WEIGHTED_COUNT + ". Consider minimizing class complexity.");
@@ -105,5 +117,7 @@ public class ComplexityCounter {
 
         return sum;
     }
+
+
 
 }
