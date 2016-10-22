@@ -15,12 +15,15 @@ public class ComplexityCounter {
 
     private final String classname;
 
+    private Collector collector;
+
     private HashMap<String, Integer> map = new HashMap<>();
 
     private HashMap<String, Integer> usage = new HashMap<>();
 
-    public ComplexityCounter(String classname) {
+    public ComplexityCounter(String classname, Collector collector) {
         this.classname = classname;
+        this.collector = collector;
     }
 
 
@@ -84,7 +87,7 @@ public class ComplexityCounter {
         int sum = map.get(method);
 
         if (sum > MAX_CYCLOMATIC_COMPLEXITY) {
-            Collector.getInstance().addWarning(classname, "\"" + method + "\" method has Cyclomatic complexity of more than " + MAX_CYCLOMATIC_COMPLEXITY + ". Consider minimizing class complexity.");
+            collector.addWarning(classname, "\"" + method + "\" method has Cyclomatic complexity of more than " + MAX_CYCLOMATIC_COMPLEXITY + ". Consider minimizing class complexity.");
         }
 
         return sum;
@@ -110,7 +113,7 @@ public class ComplexityCounter {
         }
 
         if (sum > MAX_WEIGHTED_COUNT) {
-            Collector.getInstance().addWarning(classname, "Class has Weighted Method Count more than " + MAX_WEIGHTED_COUNT + ". Consider minimizing class complexity.");
+            collector.addWarning(classname, "Class has Weighted Method Count more than " + MAX_WEIGHTED_COUNT + ". Consider minimizing class complexity.");
         }
 
         return sum;

@@ -2,6 +2,7 @@ package analyzer.smells;
 
 import analyzer.AbstractVoidVisitorAdapter;
 import analyzer.Collector;
+import analyzer.Config;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
@@ -27,7 +28,7 @@ public class VariableNamingConventionVisitor extends AbstractVoidVisitorAdapter<
     public void visit(ClassOrInterfaceDeclaration declaration, Collector collector) {
 
 
-        if (!declaration.getName().matches(CLASS_NAME_REGEX)) {
+        if (Config.CAMEL_CASE_CLASS_NAME && !declaration.getName().matches(CLASS_NAME_REGEX)) {
 
             collector.addWarning(className, "Class name must be in CamelCase");
 
@@ -49,22 +50,27 @@ public class VariableNamingConventionVisitor extends AbstractVoidVisitorAdapter<
 
         methodName = declaration.getName();
 
-        if (methodName.contains("_")) {
-            collector.addWarning(className, "Method \"" + methodName + "\"  should be in 'camelCase', not in 'underscore_case'");
+        if (Config.METHOD_IN_CAMEL_CASE) {
+            if (methodName.contains("_")) {
+                collector.addWarning(className, "Method \"" + methodName + "\"  should be in 'camelCase', not in 'underscore_case'");
 
-        } else if (!methodName.matches("^[a-z][a-zA-Z0-9]*$")) {
-            collector.addWarning(className, "Method \"" + methodName + "\"  should be in 'camelCase', not in 'underscore_case'");
+            } else if (!methodName.matches("^[a-z][a-zA-Z0-9]*$")) {
+                collector.addWarning(className, "Method \"" + methodName + "\"  should be in 'camelCase', not in 'underscore_case'");
+            }
         }
 
-        for (Parameter param: declaration.getParameters()) {
+        if (Config.PARAM_IN_CAMEL_CASE) {
+            for (Parameter param: declaration.getParameters()) {
 
-            if (param.getName().contains("_")) {
+                if (param.getName().contains("_")) {
 
-                collector.addWarning(className, "Method \"" + methodName + "\" variable \"" + param.getName() +"\" should be in 'camelCase', not in 'underscore_case'");
+                    collector.addWarning(className, "Method \"" + methodName + "\" variable \"" + param.getName() +"\" should be in 'camelCase', not in 'underscore_case'");
+
+                }
 
             }
-
         }
+
 
         super.visit(declaration, collector);
 
@@ -81,20 +87,22 @@ public class VariableNamingConventionVisitor extends AbstractVoidVisitorAdapter<
     @Override
     public void visit(VariableDeclarationExpr declaration, Collector collector) {
 
-        for (VariableDeclarator variable: declaration.getVars()) {
+        if (Config.PARAM_IN_CAMEL_CASE) {
+            for (VariableDeclarator variable: declaration.getVars()) {
 
-            String name = variable.getId().getName();
+                String name = variable.getId().getName();
 
-            if (name.matches(OK_REGEX)) // e.x. SOME_VARIABLE is OKAY
-                continue;
+                if (name.matches(OK_REGEX)) // e.x. SOME_VARIABLE is OKAY
+                    continue;
 
 
-            if (name.contains("_")) {
+                if (name.contains("_")) {
 
-                collector.addWarning(className, "Method \"" + methodName + "\" variable \"" + name  +"\" should be in 'camelCase', not in 'underscore_case'");
+                    collector.addWarning(className, "Method \"" + methodName + "\" variable \"" + name  +"\" should be in 'camelCase', not in 'underscore_case'");
+
+                }
 
             }
-
         }
 
     }

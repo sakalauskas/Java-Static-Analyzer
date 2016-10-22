@@ -2,6 +2,7 @@ package analyzer.smells;
 
 import analyzer.AbstractVoidVisitorAdapter;
 import analyzer.Collector;
+import analyzer.Config;
 import com.github.javaparser.ast.body.MethodDeclaration;
 
 public class BooleanMethodVisitor extends AbstractVoidVisitorAdapter<Collector> {
@@ -19,7 +20,7 @@ public class BooleanMethodVisitor extends AbstractVoidVisitorAdapter<Collector> 
     @Override
     public void visit(MethodDeclaration declaration, Collector collector) {
 
-        if (declaration.getType().toString().equals("boolean") && declaration.getParameters().size() == 0) {
+        if (Config.BOOLEAN_STARTS_WITH_IS && declaration.getType().toString().equals("boolean") && declaration.getParameters().size() == 0) {
 
             if (!declaration.getName().startsWith("is")) {
 

@@ -41,7 +41,7 @@ public final class Config {
     public static final int MAX_PARAM_COUNT = 8;
 
     /**
-     * Maximum length of variable
+     * Maximum length of field/parameter
      */
     public static final int MAX_VARIABLE_LENGTH = 20;
 
@@ -65,9 +65,22 @@ public final class Config {
      */
     public static final int MIN_METHOD_NAME = 3;
 
+    /**
+     * Boolean method must start with is (e.g. isSomething()) when there are no parameters
+     */
+    public static final boolean BOOLEAN_STARTS_WITH_IS = true;
 
-    public enum Warning {
+    /**
+     * Class name must be in CamelCase
+     */
+    public static final boolean CAMEL_CASE_CLASS_NAME = true;
 
-
-    }
+    /**
+     * Method must be in camelCase
+     */
+    public static final boolean METHOD_IN_CAMEL_CASE = true;
+    /**
+     * Fields/parameters must be in camelCase
+     */
+    public static final boolean PARAM_IN_CAMEL_CASE = true;
 }

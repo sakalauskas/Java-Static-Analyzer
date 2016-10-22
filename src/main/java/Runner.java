@@ -1,5 +1,5 @@
-import org.fusesource.jansi.AnsiConsole;
 import analyzer.Analyzer;
+import analyzer.Collector;
 import analyzer.printers.ComplexityPrinter;
 import analyzer.printers.MetricPrinter;
 import analyzer.printers.WarningPrinter;
@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 /**
  * Created by laurynassakalauskas on 15/10/2016.
@@ -16,13 +17,24 @@ public class Runner {
 
 
     public static void main(String[] args) throws Exception {
-        AnsiConsole.systemInstall();
 
-        String path = "/Users/laurynassakalauskas/IdeaProjects/CS409/testcases/javaparser";
+        Scanner in = new Scanner(System.in);
 
-        run(path);
+        System.out.println("Please type the project directory you want to analyze.");
 
-        AnsiConsole.systemUninstall();
+        String tempPath =  in.nextLine(); // "/Users/laurynassakalauskas/IdeaProjects/CS409/testcases/javaparser";
+        run(tempPath);
+
+
+
+//        if (args.length == 0) {
+//            System.out.println("Usage: java -jar analyzer [path]");
+//        } else {
+//            String path = args[0];
+//
+//            run(path);
+//        }
+
     }
 
     private static void run(String path) {
@@ -36,11 +48,13 @@ public class Runner {
      */
     private static void run(Path p) {
         try {
-            Files.walkFileTree(p, new Analyzer());
+            Collector collector = new Collector();
 
-            new WarningPrinter().print();
-            new MetricPrinter().print();
-            new ComplexityPrinter().print();
+            Files.walkFileTree(p, new Analyzer(collector));
+
+            new WarningPrinter(collector).print();
+            new MetricPrinter(collector).print();
+            new ComplexityPrinter(collector).print();
 
         } catch (IOException e) {
             e.printStackTrace();

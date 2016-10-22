@@ -11,7 +11,11 @@ import static org.fusesource.jansi.Ansi.ansi;
 /**
  * Created by laurynassakalauskas on 15/10/2016.
  */
-public class WarningPrinter implements Printable {
+public class WarningPrinter extends AbstractPrinter implements Printable {
+
+    public WarningPrinter(Collector collector) {
+        super(collector);
+    }
 
     @Override
     public void print() {
@@ -19,7 +23,7 @@ public class WarningPrinter implements Printable {
         System.out.println("|------------WARNINGS-----------|");
         System.out.println("|===============================|");
 
-        for (Map.Entry<String, List<String>> entry: Collector.warnings.entrySet()) {
+        for (Map.Entry<String, List<String>> entry: collector.warnings.entrySet()) {
 
             System.out.println(entry.getKey() + ": " + entry.getValue().size() + " warnings");
 
@@ -30,7 +34,7 @@ public class WarningPrinter implements Printable {
             System.out.println();
         }
 
-        if (Collector.warnings.entrySet().size() == 0) {
+        if (collector.warnings.entrySet().size() == 0) {
 
             System.out.println("|No warnings were found. Success|");
             System.out.println("|===============================|");

@@ -9,8 +9,12 @@ import java.util.Map;
 /**
  * Created by laurynassakalauskas on 15/10/2016.
  */
-public class ComplexityPrinter implements  Printable{
+public class ComplexityPrinter extends AbstractPrinter implements  Printable{
 
+
+    public ComplexityPrinter(Collector collector) {
+        super(collector);
+    }
 
     @Override
     public void print() {
@@ -18,7 +22,7 @@ public class ComplexityPrinter implements  Printable{
 
         int totalWCM = 0;
 
-        for (Map.Entry<String, ComplexityCounter> entry: Collector.complexity.entrySet()) {
+        for (Map.Entry<String, ComplexityCounter> entry: collector.complexity.entrySet()) {
 
             totalWCM += entry.getValue().weightedMethodCount();
             for (Map.Entry<String, Integer> e: entry.getValue().getUsage().entrySet()) {
@@ -27,7 +31,7 @@ public class ComplexityPrinter implements  Printable{
 
         }
 
-        totalWCM /= Collector.complexity.entrySet().size();
+        totalWCM /= collector.complexity.entrySet().size();
 
         System.out.println("|===============================|");
         System.out.println("|----------Complexity-----------|");
@@ -45,7 +49,7 @@ public class ComplexityPrinter implements  Printable{
         System.out.println("|===============================|");
         System.out.format("|%25s|%5s|\n", "Class", "Count");
         System.out.println("|===============================|");
-        for (Map.Entry<String, ComplexityCounter> entry: Collector.complexity.entrySet()) {
+        for (Map.Entry<String, ComplexityCounter> entry: collector.complexity.entrySet()) {
 
             System.out.format("|%25s|%5s|\n", entry.getKey(), entry.getValue().weightedMethodCount());
 

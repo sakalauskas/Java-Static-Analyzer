@@ -18,25 +18,12 @@ public class Collector {
     public static HashMap<String, ComplexityCounter> complexity;
 
 
-    private Collector() {
+    public Collector() {
         warnings = new HashMap<>();
         stats = new HashMap<>();
         complexity = new HashMap<>();
     }
 
-
-    /**
-     * Get Singleton instance of collector
-     *
-     * @return
-     */
-    public static Collector getInstance() {
-        if(instance == null) {
-            instance = new Collector();
-        }
-
-        return instance;
-    }
 
     /**
      * Add warnings to queue

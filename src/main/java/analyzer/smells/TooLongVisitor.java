@@ -101,7 +101,6 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
         }
 
-        collector.incrementMetric("Methods");
     }
 
 
@@ -128,7 +127,6 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
         }
 
-        collector.incrementMetric("Variables", declaration.getVars().size());
 
     }
     

@@ -15,6 +15,12 @@ import java.nio.file.attribute.BasicFileAttributes;
  * Created by laurynassakalauskas on 15/10/2016.
  */
 public class Analyzer extends SimpleFileVisitor<Path> {
+    private Collector collector;
+
+    public Analyzer(Collector collector) {
+
+        this.collector = collector;
+    }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
@@ -25,8 +31,7 @@ public class Analyzer extends SimpleFileVisitor<Path> {
 
 
         // initialize collector
-        Collector collector                 = Collector.getInstance();
-        ComplexityCounter complexityCounter = new ComplexityCounter(getClassName(file));
+        ComplexityCounter complexityCounter = new ComplexityCounter(getClassName(file), collector);
 
         // initialize compilation unit
         CompilationUnit unit = null;
@@ -36,17 +41,15 @@ public class Analyzer extends SimpleFileVisitor<Path> {
             e.printStackTrace();
         }
 
-        //System.out.println(getClassName(file));
 
-        // collect stats about too long names
+        // collect all the stats
         new BooleanMethodVisitor().visit(unit, collector);
         new TooLongVisitor().visit(unit, collector);
         new TooSmallVisitor().visit(unit, collector);
         new VariableNamingConventionVisitor().visit(unit, collector);
-//         collect stats about
-        new ClassLineCounter().visit(file);
-//         collect stats about class complexity
+        new ClassLineCounterVisitor().visit(unit, collector);
         new ClassComplexityVisitor().visit(unit, complexityCounter);
+        new MetricVisitor().visit(unit, collector);
 
         // print analysis
         complexityCounter.analyze();
@@ -65,6 +68,12 @@ public class Analyzer extends SimpleFileVisitor<Path> {
         return filename;
     }
 
+    /**
+     * We only need to analyze the Java files
+     *
+     * @param file
+     * @return
+     */
     private boolean isNotJava(Path file) {
 
         return !file.toString().endsWith("java");

@@ -1,9 +1,9 @@
 package analyzer.smells;
 
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.stmt.*;
 import analyzer.AbstractVoidVisitorAdapter;
 import analyzer.ComplexityCounter;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.stmt.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -98,6 +98,7 @@ public class ClassComplexityVisitor extends AbstractVoidVisitorAdapter<Complexit
      */
     @Override
     public void visit(SwitchEntryStmt statement, ComplexityCounter counter) {
+
 
         for (Statement st :statement.getStmts()) {
 
