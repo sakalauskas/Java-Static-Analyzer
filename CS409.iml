@@ -12,9 +12,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.github.javaparser:javaparser-core:2.5.1" level="project" />
-    <orderEntry type="library" name="org.fusesource.jansi:jansi:1.14" level="project" />
     <orderEntry type="library" name="Maven: com.github.javaparser:javaparser-core:2.5.1" level="project" />
-    <orderEntry type="library" name="Maven: org.fusesource.jansi:jansi:1.11" level="project" />
-    <orderEntry type="library" name="JHD_MIW2011" level="project" />
   </component>
 </module>

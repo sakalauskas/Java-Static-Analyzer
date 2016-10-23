@@ -5,10 +5,6 @@ package analyzer;
  */
 public final class Config {
 
-    /**
-     * Maximum number of acceptable parent classes while inheriting.
-     */
-    public static final int MAX_CLASS_INHERITANCE = 6;
 
     /**
      * Max count for calculating "Cyclomatic Complexity"

@@ -1,8 +1,8 @@
-package analyzer.smells;
+package analyzer.visitors;
 
 import analyzer.AbstractVoidVisitorAdapter;
-import analyzer.Collector;
 import analyzer.Config;
+import analyzer.collectors.Collector;
 import com.github.javaparser.ast.CompilationUnit;
 
 /**

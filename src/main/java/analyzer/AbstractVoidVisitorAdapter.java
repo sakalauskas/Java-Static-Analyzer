@@ -4,9 +4,11 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 /**
+ * Wrapper class for automatically resolving classname and reusing throughout the visitor
+ *
  * Created by laurynassakalauskas on 15/10/2016.
  */
-public class AbstractVoidVisitorAdapter<A> extends VoidVisitorAdapter<A> {
+public abstract class AbstractVoidVisitorAdapter<A> extends VoidVisitorAdapter<A> {
 
     protected String className;
 

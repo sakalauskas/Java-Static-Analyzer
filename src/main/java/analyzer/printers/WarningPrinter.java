@@ -1,43 +1,51 @@
 package analyzer.printers;
 
-import analyzer.Collector;
+import analyzer.collectors.HashMapCollector;
 
 import java.util.List;
 import java.util.Map;
-
-import static org.fusesource.jansi.Ansi.Color.RED;
-import static org.fusesource.jansi.Ansi.ansi;
 
 /**
  * Created by laurynassakalauskas on 15/10/2016.
  */
 public class WarningPrinter extends AbstractPrinter implements Printable {
 
-    public WarningPrinter(Collector collector) {
+    public WarningPrinter(HashMapCollector collector) {
         super(collector);
     }
 
+
+    /**
+     * Print out warnings to the console
+     */
     @Override
     public void print() {
-        System.out.println("_________________________________");
-        System.out.println("|------------WARNINGS-----------|");
-        System.out.println("|===============================|");
+        System.out.println("____________________________________________________________________");
+        System.out.println("|---------------------------WARNINGS-------------------------------|");
+        System.out.println("|==================================================================|");
 
-        for (Map.Entry<String, List<String>> entry: collector.warnings.entrySet()) {
+        if (collector.getWarnings().entrySet().size() == 0) {
+
+            System.out.println("|No warnings were found. That's awesome!                           |");
+
+        } else {
+            System.out.println("|Oh no, there are " + collector.getWarnings().entrySet().size()+ " warnings you need to fix                      |");
+
+        }
+        System.out.println("|==================================================================|");
+
+        for (Map.Entry<String, List<String>> entry: collector.getWarnings().entrySet()) {
 
             System.out.println(entry.getKey() + ": " + entry.getValue().size() + " warnings");
 
             for (String warning: entry.getValue()) {
 
-                System.out.println(ansi().fg(RED).a("[WARNING]" ).reset().a(" " + warning));
+                System.out.println("[WARNING] " + warning);
             }
             System.out.println();
         }
 
-        if (collector.warnings.entrySet().size() == 0) {
 
-            System.out.println("|No warnings were found. Success|");
-            System.out.println("|===============================|");
-        }
+
     }
 }

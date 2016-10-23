@@ -1,5 +1,7 @@
 package analyzer;
 
+import analyzer.collectors.Collector;
+
 import java.util.HashMap;
 import java.util.Map;
 

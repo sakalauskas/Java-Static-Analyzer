@@ -1,8 +1,8 @@
-package analyzer.smells;
+package analyzer.visitors;
 
 import analyzer.AbstractVoidVisitorAdapter;
-import analyzer.Collector;
 import analyzer.Config;
+import analyzer.collectors.Collector;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
@@ -28,7 +28,7 @@ public class VariableNamingConventionVisitor extends AbstractVoidVisitorAdapter<
     public void visit(ClassOrInterfaceDeclaration declaration, Collector collector) {
 
 
-        if (Config.CAMEL_CASE_CLASS_NAME && !declaration.getName().matches(CLASS_NAME_REGEX)) {
+        if (Config.CAMEL_CASE_CLASS_NAME && declaration.getName().length() > 2 && !declaration.getName().matches(CLASS_NAME_REGEX)) {
 
             collector.addWarning(className, "Class name must be in CamelCase");
 

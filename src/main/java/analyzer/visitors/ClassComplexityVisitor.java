@@ -1,4 +1,4 @@
-package analyzer.smells;
+package analyzer.visitors;
 
 import analyzer.AbstractVoidVisitorAdapter;
 import analyzer.ComplexityCounter;

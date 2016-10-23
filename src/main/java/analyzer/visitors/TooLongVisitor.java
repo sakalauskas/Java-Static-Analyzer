@@ -1,9 +1,8 @@
-package analyzer.smells;
+package analyzer.visitors;
 
 import analyzer.AbstractVoidVisitorAdapter;
-import analyzer.Collector;
 import analyzer.Config;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import analyzer.collectors.Collector;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.body.VariableDeclarator;
@@ -25,25 +24,7 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
     private static final int MAX_METHODS_COUNT = Config.MAX_METHODS_COUNT;
 
-    private static final int MAX_CLASS_INHERITANCE = Config.MAX_CLASS_INHERITANCE;
 
-    /**
-     * Check for inheritance errors
-     *
-     * @param declaration
-     * @param collector
-     */
-    @Override
-    public void visit(ClassOrInterfaceDeclaration declaration, Collector collector) {
-
-        if (declaration.getExtends().size() > MAX_CLASS_INHERITANCE) {
-
-            collector.addWarning(className, "Class extends more then " + MAX_CLASS_INHERITANCE + " classes");
-
-        }
-
-        super.visit(declaration, collector);
-    }
 
     /**
      * Check for method count

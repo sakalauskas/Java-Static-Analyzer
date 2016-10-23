@@ -1,6 +1,7 @@
 package analyzer;
 
-import analyzer.smells.*;
+import analyzer.collectors.Collector;
+import analyzer.visitors.*;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
@@ -15,6 +16,7 @@ import java.nio.file.attribute.BasicFileAttributes;
  * Created by laurynassakalauskas on 15/10/2016.
  */
 public class Analyzer extends SimpleFileVisitor<Path> {
+
     private Collector collector;
 
     public Analyzer(Collector collector) {
@@ -58,6 +60,12 @@ public class Analyzer extends SimpleFileVisitor<Path> {
         return FileVisitResult.CONTINUE;
     }
 
+    /**
+     * Extract class name from the path
+     *
+     * @param file
+     * @return
+     */
     private String getClassName(Path file) {
 
         String filename = file.getFileName().toString();

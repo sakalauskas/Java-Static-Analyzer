@@ -1,5 +1,5 @@
 import analyzer.Analyzer;
-import analyzer.Collector;
+import analyzer.collectors.HashMapCollector;
 import analyzer.printers.ComplexityPrinter;
 import analyzer.printers.MetricPrinter;
 import analyzer.printers.WarningPrinter;
@@ -16,17 +16,24 @@ import java.util.Scanner;
 public class Runner {
 
 
+    /**
+     * Simple Analyzer runner method
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Please type the project directory you want to analyze.");
+        System.out.println("Please type full path to project directory you want to analyze.");
 
-        String tempPath =  in.nextLine(); // "/Users/laurynassakalauskas/IdeaProjects/CS409/testcases/javaparser";
+//        String tempPath =  in.nextLine();
+        String tempPath =  "/Users/laurynassakalauskas/IdeaProjects/CS409/testcases/java-design-patterns";
         run(tempPath);
 
 
-
+//        other way of using
 //        if (args.length == 0) {
 //            System.out.println("Usage: java -jar analyzer [path]");
 //        } else {
@@ -37,6 +44,11 @@ public class Runner {
 
     }
 
+    /**
+     * Convert String to path if needed
+     *
+     * @param path
+     */
     private static void run(String path) {
         run(Paths.get(path));
     }
@@ -48,7 +60,7 @@ public class Runner {
      */
     private static void run(Path p) {
         try {
-            Collector collector = new Collector();
+            HashMapCollector collector = new HashMapCollector();
 
             Files.walkFileTree(p, new Analyzer(collector));
 
