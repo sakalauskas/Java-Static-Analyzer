@@ -28,9 +28,13 @@ public class Runner {
 
         System.out.println("Please type full path to project directory you want to analyze.");
 
-//        String tempPath =  in.nextLine();
-        String tempPath =  "/Users/laurynassakalauskas/IdeaProjects/CS409/testcases/java-design-patterns";
-        run(tempPath);
+        String tempPath =  in.nextLine();
+//        String tempPath =  "/Users/laurynassakalauskas/IdeaProjects/CS409/testcases/java-design-patterns";
+        try {
+            run(tempPath);
+        } catch (Exception e) {
+            System.out.println("Looks like you specified not existing directory. Exiting...");
+        }
 
 
 //        other way of using

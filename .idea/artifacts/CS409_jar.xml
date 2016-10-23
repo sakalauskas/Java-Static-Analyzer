@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CS409:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CS409_jar</output-path>
+    <root id="archive" name="CS409.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="CS409" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/2.5.1/javaparser-core-2.5.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
