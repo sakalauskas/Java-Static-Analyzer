@@ -1,6 +1,6 @@
-# Overview
+# Java Static Code Analyzer
 
-# I have decided to implement a code smell detector with some metrics based on the ideas of many other static analyzers for writing nice looking and maintainable code. Therefore my produced analyzer can detect & collect statistics and metrics about the project mentioned below:
+The analyzer can detect & collect statistics and metrics about the project mentioned below:
 
 **Code smells**
 
@@ -60,9 +60,15 @@
 
 10. Total Fields in project.
 
-# Outline of design
+# Building the app
 
-I have used JavaParser framework’s *VoidVisitorAdapter* to parse AST. Since it does not modify the project, I did not needed to use any other "Visitors". Visitor pattern is being used heavily to walk through the AST and collect all the relevant statistics and warnings. There are 7 different visitor classes separated so they handle different responsibilities to make the code more maintainable, understandable and with SOLID principles in mind.
+1. Install Maven dependencies: `mvn install`
+2. Compile java file: `javac src/main/java/Runner.java`
+2. Run java file `java src/main/java/Runner`
+
+## Outline of design
+
+I have used JavaParser framework’s *VoidVisitorAdapter* to parse AST (Abstract syntax tree). Visitor pattern is being used heavily to walk through the AST and collect all the relevant statistics and warnings. There are 7 different visitor classes separated so they handle different responsibilities to make the code more maintainable, understandable and with SOLID principles in mind.
 
 All the metrics and errors are collected in *Collector* object which holds all the data collected and can be reused throughout the project. *Collector* is an interface and I have added an implementation of *HashMapCollector* to simply collect the data into *HashMap*. In the future, if we for example want to store data to MySQL database, we can add  *MysqlCollector* implementation and we would only need to change one line of code where we set the implementation to use.
 
@@ -72,10 +78,5 @@ With the current design it is easy to adjust the project how we want to output s
 
 There is a *Config.java* class where all the constants are defined in one file for easy configuration change. This could be useful to adjust the limits or enable/disable some parts of the application without going and searching through the code.
 
-Interesting parts
-
-Well, this whole project is very interesting, since you can quickly understand the bad parts of your code and correct them. The best feeling is when your code does not throw any warnings after analyzing it. This could mean that the code follows good coding standards and in overall can indicate that you are good programmer. Running analyzer’s source code through the analyzer produces zero warning, which is great!
-
-# Results and evaluation
-
-The analyzer application produces the relevant results for any Java project you put in. As a test cases, I have included several java projects from github ( that produced correct metrics and did not generate any false warnings.
+## Results and evaluation
+The analyzer application produces the relevant results for any Java project you put in. As a test cases, I have included several java projects from github (that produced correct metrics and did not generate any false warnings).
