@@ -6,25 +6,18 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40b5ff76-898a-4da8-80e8-fcdbb043945d" name="Default" comment="Edit readme">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS409.iml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_javaparser_javaparser_core_2_5_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_javaparser_javaparser_core_3_4_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/analyzer/AbstractVoidVisitorAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/analyzer/AbstractVoidVisitorAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/analyzer/Analyzer.java" afterPath="$PROJECT_DIR$/src/main/java/analyzer/Analyzer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/analyzer/visitors/BooleanMethodVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/analyzer/visitors/BooleanMethodVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/analyzer/visitors/ClassComplexityVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/analyzer/visitors/ClassComplexityVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/analyzer/visitors/MetricVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/analyzer/visitors/MetricVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/analyzer/visitors/TooLongVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/analyzer/visitors/TooLongVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/analyzer/visitors/TooSmallVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/analyzer/visitors/TooSmallVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/analyzer/visitors/VariableNamingConventionVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/analyzer/visitors/VariableNamingConventionVisitor.java" />
+    <list default="true" id="40b5ff76-898a-4da8-80e8-fcdbb043945d" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/CS409_jar.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_javaparser_javaparser_core_3_4_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_github_javaparser_javaparser_core_2_5_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="CS409.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,7 +62,7 @@
       <file leaf-file-name="Runner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Runner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
+            <state relative-caret-position="667">
               <caret line="68" column="22" lean-forward="true" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -822,7 +815,7 @@
       <workItem from="1477160588985" duration="5061000" />
       <workItem from="1477253660475" duration="6104000" />
       <workItem from="1477259900630" duration="3187000" />
-      <workItem from="1507834240433" duration="894000" />
+      <workItem from="1507834240433" duration="1009000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <created>1476548407331</created>
@@ -859,11 +852,18 @@
       <option name="project" value="LOCAL" />
       <updated>1477262386946</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Upgrade JavaParser">
+      <created>1507835142276</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1507835142277</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47044000" />
+    <option name="totallyTimeSpent" value="47159000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="25" width="1926" height="1178" extended-state="6" />
@@ -949,8 +949,8 @@
     <MESSAGE value="Code improved a bit" />
     <MESSAGE value="Final edits and restructuring" />
     <MESSAGE value="Edit readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit readme" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Upgrade JavaParser" />
+    <option name="LAST_COMMIT_MESSAGE" value="Upgrade JavaParser" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1360,7 +1360,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Runner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
+        <state relative-caret-position="667">
           <caret line="68" column="22" lean-forward="true" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
