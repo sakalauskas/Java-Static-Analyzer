@@ -31,18 +31,11 @@ public class Analyzer extends SimpleFileVisitor<Path> {
         if (isNotJava(file))
             return FileVisitResult.CONTINUE;
 
-
         // initialize collector
         ComplexityCounter complexityCounter = new ComplexityCounter(getClassName(file), collector);
 
         // initialize compilation unit
-        CompilationUnit unit = null;
-        try {
-            unit = JavaParser.parse(file.toFile());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+        CompilationUnit unit = JavaParser.parse(file.toFile());
 
         // collect all the stats
         new BooleanMethodVisitor().visit(unit, collector);

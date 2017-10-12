@@ -35,7 +35,7 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
     @Override
     public void visit(MethodCallExpr declaration, Collector collector) {
 
-        if (declaration.getArgs().size() > MAX_METHODS_COUNT) {
+        if (declaration.getArguments().size() > MAX_METHODS_COUNT) {
 
             collector.addWarning(className, "Class  has more than " + MAX_METHODS_COUNT + " methods");
 
@@ -52,10 +52,9 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
      */
     @Override
     public void visit(MethodDeclaration declaration, Collector collector) {
-
-        int methodBodyLength = declaration.getBegin().line - declaration.getEnd().line;
-
-        int methodNameLength = declaration.getName().length();
+        int methodBodyLength = declaration.getRange().map(range -> range.begin.line - range.end.line).orElse(0);
+        
+        int methodNameLength = declaration.getNameAsString().length();
         
         int parametersCount = declaration.getParameters().size();
 
@@ -74,7 +73,7 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
 
         for (Parameter param: declaration.getParameters()) {
 
-            if (param.getName().length() > MAX_VARIABLE_LENGTH) {
+            if (param.getNameAsString().length() > MAX_VARIABLE_LENGTH) {
 
                 collector.addWarning(className, "Method \"" + declaration.getName() + "\" variable \"" + param.getName() +"\" is way too long!");
 
@@ -94,15 +93,15 @@ public class TooLongVisitor extends AbstractVoidVisitorAdapter<Collector> {
     @Override
     public void visit(VariableDeclarationExpr declaration, Collector collector) {
 
-        if (declaration.getVars().size() > MAX_VARIABLE_COUNT) {
+        if (declaration.getVariables().size() > MAX_VARIABLE_COUNT) {
             collector.addWarning(className, "Class has more than " + MAX_VARIABLE_COUNT + " variables");
         }
 
-        for (VariableDeclarator variable: declaration.getVars()) {
+        for (VariableDeclarator variable: declaration.getVariables()) {
 
-            if (variable.getId().getName().length() > MAX_VARIABLE_LENGTH) {
+            if (variable.getNameAsString().length() > MAX_VARIABLE_LENGTH) {
 
-                collector.addWarning(className, "Field variable \"" + variable.getId().getName() +"\" is way too long!");
+                collector.addWarning(className, "Field variable \"" + variable.getNameAsString() +"\" is way too long!");
 
             }
 

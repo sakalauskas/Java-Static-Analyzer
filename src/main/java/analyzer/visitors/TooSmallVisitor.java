@@ -41,10 +41,10 @@ public class TooSmallVisitor extends AbstractVoidVisitorAdapter<Collector> {
     @Override
     public void visit(VariableDeclarationExpr declaration, Collector collector) {
 
-        for (VariableDeclarator variable: declaration.getVars()) {
+        for (VariableDeclarator variable: declaration.getVariables()) {
 
-            if (variable.getId().getName().length() < MIN_VARIABLE_LENGTH) {
-                collector.addWarning(className, "Variable \"" + variable.getId().getName() + "\" length is too small");
+            if (variable.getNameAsString().length() < MIN_VARIABLE_LENGTH) {
+                collector.addWarning(className, "Variable \"" + variable.getNameAsString() + "\" length is too small");
             }
 
         }

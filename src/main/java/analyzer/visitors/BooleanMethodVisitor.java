@@ -21,7 +21,7 @@ public class BooleanMethodVisitor extends AbstractVoidVisitorAdapter<Collector> 
 
         if (Config.BOOLEAN_STARTS_WITH_IS && declaration.getType().toString().equals("boolean") && declaration.getParameters().size() == 0) {
 
-            if (!declaration.getName().startsWith("is")) {
+            if (!declaration.getNameAsString().startsWith("is")) {
 
                 collector.addWarning(className, "Method name \"" + declaration.getType().toString() + "\"  should start with is, e.g.\"isSomething()\"");
 

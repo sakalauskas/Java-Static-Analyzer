@@ -23,7 +23,7 @@ public class ClassComplexityVisitor extends AbstractVoidVisitorAdapter<Complexit
      */
     public void visit(MethodDeclaration declaration, ComplexityCounter counter) {
 
-        methodName = declaration.getName();
+        methodName = declaration.getNameAsString();
 
         super.visit(declaration, counter);
     }
@@ -100,7 +100,7 @@ public class ClassComplexityVisitor extends AbstractVoidVisitorAdapter<Complexit
     public void visit(SwitchEntryStmt statement, ComplexityCounter counter) {
 
 
-        for (Statement st :statement.getStmts()) {
+        for (Statement st :statement.getStatements()) {
 
             counter.add(methodName, "SWITCH");
 
