@@ -28,7 +28,7 @@ public class VariableNamingConventionVisitor extends AbstractVoidVisitorAdapter<
     public void visit(ClassOrInterfaceDeclaration declaration, Collector collector) {
 
 
-        if (Config.CAMEL_CASE_CLASS_NAME && declaration.getName().length() > 2 && !declaration.getName().matches(CLASS_NAME_REGEX)) {
+        if (Config.CAMEL_CASE_CLASS_NAME && declaration.getNameAsString().length() > 2 && !declaration.getNameAsString().matches(CLASS_NAME_REGEX)) {
 
             collector.addWarning(className, "Class name must be in CamelCase");
 
@@ -48,7 +48,7 @@ public class VariableNamingConventionVisitor extends AbstractVoidVisitorAdapter<
     @Override
     public void visit(MethodDeclaration declaration, Collector collector) {
 
-        methodName = declaration.getName();
+        methodName = declaration.getNameAsString();
 
         if (Config.METHOD_IN_CAMEL_CASE) {
             if (methodName.contains("_")) {
@@ -62,7 +62,7 @@ public class VariableNamingConventionVisitor extends AbstractVoidVisitorAdapter<
         if (Config.PARAM_IN_CAMEL_CASE) {
             for (Parameter param: declaration.getParameters()) {
 
-                if (param.getName().contains("_")) {
+                if (param.getNameAsString().contains("_")) {
 
                     collector.addWarning(className, "Method \"" + methodName + "\" variable \"" + param.getName() +"\" should be in 'camelCase', not in 'underscore_case'");
 
@@ -88,9 +88,9 @@ public class VariableNamingConventionVisitor extends AbstractVoidVisitorAdapter<
     public void visit(VariableDeclarationExpr declaration, Collector collector) {
 
         if (Config.PARAM_IN_CAMEL_CASE) {
-            for (VariableDeclarator variable: declaration.getVars()) {
+            for (VariableDeclarator variable: declaration.getVariables()) {
 
-                String name = variable.getId().getName();
+                String name = variable.getNameAsString();
 
                 if (name.matches(OK_REGEX)) // e.x. SOME_VARIABLE is OKAY
                     continue;

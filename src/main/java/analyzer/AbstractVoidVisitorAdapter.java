@@ -16,7 +16,7 @@ public abstract class AbstractVoidVisitorAdapter<A> extends VoidVisitorAdapter<A
     public void visit(CompilationUnit cu, A arg) {
 
         if (cu.getTypes().size() > 0) {
-            className = cu.getTypes().get(0).getName();
+            className = cu.getTypes().get(0).getNameAsString();
         } else {
             className = "Unknown class";
         }

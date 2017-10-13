@@ -25,10 +25,10 @@ public class MetricVisitor extends AbstractVoidVisitorAdapter<Collector> {
             collector.incrementMetric("Classes");
 
 
-            if (declaration.toStringWithoutComments().contains("public final class")) {
+            if (declaration.isFinal()) {
                 collector.incrementMetric("Final Classes");
             }
-            if (declaration.toStringWithoutComments().contains("public abstract class")) {
+            if (declaration.isAbstract()) {
                 collector.incrementMetric("Abstract Classes");
             }
 
@@ -94,7 +94,7 @@ public class MetricVisitor extends AbstractVoidVisitorAdapter<Collector> {
     @Override
     public void visit(VariableDeclarationExpr declaration, Collector collector) {
 
-        collector.incrementMetric("Fields", declaration.getVars().size());
+        collector.incrementMetric("Fields", declaration.getVariables().size());
 
     }
 
